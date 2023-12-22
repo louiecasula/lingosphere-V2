@@ -1,6 +1,21 @@
 package com.passion.lingosphere.word;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table
 public class Word {
+
+    @Id
+    @SequenceGenerator(
+            name = "word_sequence",
+            sequenceName = "word_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "word_sequence"
+    )
     private Long id;
     private String language;
     private String wordText;
