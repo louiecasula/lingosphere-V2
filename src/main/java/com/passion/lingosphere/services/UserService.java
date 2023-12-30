@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.naming.AuthenticationException;
+
 @Service
 public class UserService {
 
@@ -39,5 +41,17 @@ public class UserService {
 
         // Save the new user entity
         return userRepository.save(newUser);
+    }
+
+    public User authenticateUser(String username, String password) throws AuthenticationException {
+        // Check that the user's username and password exist
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new AuthenticationException("Username doesn't exist"));
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new AuthenticationException("Password doesn't match");
+        }
+
+        // Return user
+        return user;
     }
 }
