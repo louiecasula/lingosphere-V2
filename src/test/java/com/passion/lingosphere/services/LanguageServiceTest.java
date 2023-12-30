@@ -42,4 +42,18 @@ public class LanguageServiceTest {
         assertNotNull(added);
         assertEquals(languageDto.getName(), added.getName());
     }
+
+    @Test
+    public void addLanguageNameTakenTest() {
+        given(languageRepository.existsByName(languageDto.getName())).willReturn(true);
+
+        assertThrows(Exception.class, () -> languageService.addLanguage(languageDto));
+    }
+
+    @Test
+    public void addLanguageCodeTakenTest() {
+        given(languageRepository.existsByCode(languageDto.getCode())).willReturn(true);
+
+        assertThrows(Exception.class, () -> languageService.addLanguage(languageDto));
+    }
 }
