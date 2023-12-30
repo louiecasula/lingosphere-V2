@@ -3,77 +3,50 @@ package com.passion.lingosphere.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table(name = "words")
 public class Word {
 
     @Id
-    @SequenceGenerator(
-            name = "word_sequence",
-            sequenceName = "word_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "word_sequence"
-    )
-    private Long id;
-    private String language;
-    private String wordText;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long wordId;
+
+    @Column(name = "text", nullable = false)
+    private String text;
+
+    @Column(name = "part_of_speech")
     private String partOfSpeech;
-    private String pronunciation;
-    private String audio;
+
+    @Column(name = "definition", length = 1000)
     private String definition;
-    private String exampleSentence;
-    private String etymology;
+
+    @ManyToOne
+    @JoinColumn(name = "language_id", nullable = false)
+    private Language language;
 
     public Word() {
     }
 
-    public Word(Long id, String language, String wordText, String partOfSpeech, String pronunciation, String audio, String definition, String exampleSentence, String etymology) {
-        this.id = id;
-        this.language = language;
-        this.wordText = wordText;
+    public Word(String text, String partOfSpeech, String definition, Language language) {
+        this.text = text;
         this.partOfSpeech = partOfSpeech;
-        this.pronunciation = pronunciation;
-        this.audio = audio;
         this.definition = definition;
-        this.exampleSentence = exampleSentence;
-        this.etymology = etymology;
-    }
-
-    public Word(String language, String wordText, String partOfSpeech, String pronunciation, String audio, String definition, String exampleSentence, String etymology) {
-        this.language = language;
-        this.wordText = wordText;
-        this.partOfSpeech = partOfSpeech;
-        this.pronunciation = pronunciation;
-        this.audio = audio;
-        this.definition = definition;
-        this.exampleSentence = exampleSentence;
-        this.etymology = etymology;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
         this.language = language;
     }
 
-    public String getWordText() {
-        return wordText;
+    public Long getWordId() {
+        return wordId;
     }
 
-    public void setWordText(String wordText) {
-        this.wordText = wordText;
+    public void setWordId(Long wordId) {
+        this.wordId = wordId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getPartOfSpeech() {
@@ -84,22 +57,6 @@ public class Word {
         this.partOfSpeech = partOfSpeech;
     }
 
-    public String getPronunciation() {
-        return pronunciation;
-    }
-
-    public void setPronunciation(String pronunciation) {
-        this.pronunciation = pronunciation;
-    }
-
-    public String getAudio() {
-        return audio;
-    }
-
-    public void setAudio(String audio) {
-        this.audio = audio;
-    }
-
     public String getDefinition() {
         return definition;
     }
@@ -108,34 +65,11 @@ public class Word {
         this.definition = definition;
     }
 
-    public String getExampleSentence() {
-        return exampleSentence;
+    public Language getLanguage() {
+        return language;
     }
 
-    public void setExampleSentence(String exampleSentence) {
-        this.exampleSentence = exampleSentence;
-    }
-
-    public String getEtymology() {
-        return etymology;
-    }
-
-    public void setEtymology(String etymology) {
-        this.etymology = etymology;
-    }
-
-    @Override
-    public String toString() {
-        return "Word{" +
-                "id=" + id +
-                ", language='" + language + '\'' +
-                ", wordText='" + wordText + '\'' +
-                ", partOfSpeech='" + partOfSpeech + '\'' +
-                ", pronunciation='" + pronunciation + '\'' +
-                ", audio='" + audio + '\'' +
-                ", definition='" + definition + '\'' +
-                ", exampleSentence='" + exampleSentence + '\'' +
-                ", etymology='" + etymology + '\'' +
-                '}';
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 }
