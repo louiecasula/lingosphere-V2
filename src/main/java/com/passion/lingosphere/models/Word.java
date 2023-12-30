@@ -1,4 +1,4 @@
-package com.passion.lingosphere.word;
+package com.passion.lingosphere.models;
 
 import jakarta.persistence.*;
 
