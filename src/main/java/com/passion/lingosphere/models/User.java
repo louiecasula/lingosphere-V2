@@ -2,7 +2,6 @@ package com.passion.lingosphere.models;
 
 import jakarta.persistence.*;
 import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -26,7 +25,6 @@ public class User {
 
     // Constructors
     public User() {
-        // Default constructor
     }
 
     public User(String username, String email, String password) {
@@ -35,7 +33,6 @@ public class User {
         this.password = password;
     }
 
-    // Getters and Setters
     public Long getUserId() {
         return userId;
     }
@@ -75,6 +72,4 @@ public class User {
     public void setUserLanguages(Set<UserLanguage> userLanguages) {
         this.userLanguages = userLanguages;
     }
-
-    // Additional methods like equals(), hashCode(), and toString() can be added as needed
 }
