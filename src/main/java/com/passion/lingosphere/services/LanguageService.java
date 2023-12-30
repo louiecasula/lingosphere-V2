@@ -6,6 +6,8 @@ import com.passion.lingosphere.repositories.LanguageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LanguageService {
 
@@ -32,5 +34,9 @@ public class LanguageService {
 
         // Save the new language entity
         return languageRepository.save(newLanguage);
+    }
+
+    public List<Language> getAllLanguages() {
+        return languageRepository.findAll();
     }
 }
