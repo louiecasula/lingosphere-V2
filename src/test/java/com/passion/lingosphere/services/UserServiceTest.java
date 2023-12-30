@@ -68,7 +68,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void authenticateUserSuccessfulTest1() throws AuthenticationException {
+    public void authenticateUserSuccessfulTest() throws AuthenticationException {
         // Mocked user values
         when(user.getUsername()).thenReturn(userDto.getUsername());
         when(user.getPassword()).thenReturn("encodedPassword");
@@ -82,4 +82,18 @@ public class UserServiceTest {
         assertEquals(userDto.getUsername(), authenticatedUser.getUsername());
     }
 
+    @Test
+    public void authenticateUserWrongUsername() {
+        given(userRepository.findByUsername(userDto.getUsername())).willReturn(Optional.empty());
+
+        assertThrows(AuthenticationException.class, () -> userService.authenticateUser(userDto.getUsername(), userDto.getPassword()));
+    }
+
+    @Test
+    public void authenticateUserWrongPassword() {
+        given(userRepository.findByUsername(userDto.getUsername())).willReturn(Optional.of(user));
+        given(passwordEncoder.matches(userDto.getPassword(), user.getPassword())).willReturn(false);
+
+        assertThrows(AuthenticationException.class, () -> userService.authenticateUser(userDto.getUsername(), userDto.getPassword()));
+    }
 }
