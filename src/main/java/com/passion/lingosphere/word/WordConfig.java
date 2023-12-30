@@ -1,5 +1,7 @@
 package com.passion.lingosphere.word;
 
+import com.passion.lingosphere.models.Word;
+import com.passion.lingosphere.repositories.WordRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

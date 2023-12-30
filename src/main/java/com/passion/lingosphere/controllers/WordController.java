@@ -1,14 +1,17 @@
-package com.passion.lingosphere.word;
+package com.passion.lingosphere.controllers;
 
+import com.passion.lingosphere.models.Word;
+import com.passion.lingosphere.services.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Random;
 
 @RestController
-@RequestMapping(path = "/word")
+@RequestMapping(path = "/words")
 public class WordController {
 
     private final WordService wordService;
@@ -21,5 +24,12 @@ public class WordController {
     @GetMapping
     public List<Word> getWords() {
         return wordService.getWords();
+    }
+
+    @GetMapping
+    public Word getRandomWord() {
+        Random random = new Random();
+        int index = random.nextInt(getWords().size());
+        return getWords().get(index);
     }
 }

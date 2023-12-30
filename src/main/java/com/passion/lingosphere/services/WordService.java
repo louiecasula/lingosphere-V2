@@ -1,7 +1,8 @@
-package com.passion.lingosphere.word;
+package com.passion.lingosphere.services;
 
+import com.passion.lingosphere.models.Word;
+import com.passion.lingosphere.repositories.WordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
