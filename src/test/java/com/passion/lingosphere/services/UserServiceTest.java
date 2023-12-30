@@ -12,6 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import javax.naming.AuthenticationException;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
@@ -23,16 +26,19 @@ public class UserServiceTest {
     private UserRepository userRepository;
     @Mock
     private PasswordEncoder passwordEncoder;
+    @Mock
+    private User user;
     @InjectMocks
     private UserService userService;
     private UserDto userDto;
 
     @BeforeEach
     public void setup() {
-        userDto = new UserDto();
-        userDto.setUsername("testuser");
-        userDto.setEmail("user@lingo.com");
-        userDto.setPassword("zipcode");
+        String username = "testuser";
+        String email = "user@lingo.com";
+        String password = "zipcode";
+        userDto = new UserDto(username, email, password);
+//        user = new User(username, email, password);
     }
 
     @Test
@@ -48,16 +54,32 @@ public class UserServiceTest {
     }
 
     @Test
-    public void registerUserUsernameTakenTest() throws UsernameAlreadyExistsException {
+    public void registerUserUsernameTakenTest() {
         given(userRepository.existsByUsername(userDto.getUsername())).willReturn(true);
 
         assertThrows(UsernameAlreadyExistsException.class, () -> userService.registerUser(userDto));
     }
 
     @Test
-    public void registerUserEmailTakenTest() throws EmailAlreadyExistsException {
+    public void registerUserEmailTakenTest() {
         given(userRepository.existsByEmail(userDto.getEmail())).willReturn(true);
 
         assertThrows(EmailAlreadyExistsException.class, () -> userService.registerUser(userDto));
     }
+
+    @Test
+    public void authenticateUserSuccessfulTest1() throws AuthenticationException {
+        // Mocked user values
+        when(user.getUsername()).thenReturn(userDto.getUsername());
+        when(user.getPassword()).thenReturn("encodedPassword");
+
+        given(userRepository.findByUsername(userDto.getUsername())).willReturn(Optional.of(user));
+        given(passwordEncoder.matches(userDto.getPassword(), "encodedPassword")).willReturn(true);
+
+        User authenticatedUser = userService.authenticateUser(userDto.getUsername(), userDto.getPassword());
+
+        assertNotNull(authenticatedUser);
+        assertEquals(userDto.getUsername(), authenticatedUser.getUsername());
+    }
+
 }
