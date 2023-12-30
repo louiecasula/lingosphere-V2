@@ -5,32 +5,41 @@ import com.passion.lingosphere.models.User;
 import com.passion.lingosphere.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.*;
+
+@ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
+    @Mock
     private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    @InjectMocks
     private UserService userService;
-    private UserDto user;
+    private UserDto userDto;
 
     @BeforeEach
     public void setup() {
-        user = new UserDto();
-        user.setUsername("testuser");
-        user.setEmail("user@lingo.com");
-        user.setPassword("zipcode");
+        userDto = new UserDto();
+        userDto.setUsername("testuser");
+        userDto.setEmail("user@lingo.com");
+        userDto.setPassword("zipcode");
     }
 
     @Test
     public void registerUserSuccessfulTest() throws Exception {
-        Assertions.assertFalse(userRepository.existsByUsername(user.getUsername()));
-        Assertions.assertFalse(userRepository.existsByEmail(user.getEmail()));
+        given(userRepository.existsByUsername(userDto.getUsername())).willReturn(false);
+        given(userRepository.existsByEmail(userDto.getEmail())).willReturn(false);
 
-        User registered = userService.registerUser(user);
+        given(userRepository.save(any(User.class))).willReturn(new User(userDto.getUsername(), userDto.getEmail(), userDto.getPassword()));
 
-        Assertions.assertNotNull(registered);
-        Assertions.assertEquals(user.getUsername(), registered.getUsername());
+        User registered = userService.registerUser(userDto);
+
+        assertNotNull(registered);
+        assertEquals(userDto.getUsername(), registered.getUsername());
     }
 }
