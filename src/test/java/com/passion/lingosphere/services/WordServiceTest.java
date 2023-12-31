@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
@@ -50,5 +52,21 @@ public class WordServiceTest {
         given(wordRepository.existsByText(word.getText())).willReturn(true);
 
         assertThrows(Exception.class, () -> wordService.addWord(wordDto));
+    }
+
+    @Test
+    public void getWordByIdSuccessfulTest() throws Exception {
+        given(wordRepository.findById(0L)).willReturn(Optional.of(word));
+
+        Word word1 = wordService.getWordById(0L);
+
+        assertNotNull(word1);
+    }
+
+    @Test
+    public void getWordByIdFailureTest() {
+        given(wordRepository.findById(0L)).willReturn(Optional.empty());
+
+        assertThrows(Exception.class, () -> wordService.getWordById(0L));
     }
 }
