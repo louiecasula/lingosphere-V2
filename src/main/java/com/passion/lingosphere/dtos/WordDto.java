@@ -1,21 +1,24 @@
 package com.passion.lingosphere.dtos;
 
 import com.passion.lingosphere.models.Language;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 public class WordDto {
 
     private String text;
     private String partOfSpeech;
     private String definition;
+    private Integer level;
     private Language language;
 
     public WordDto() {
     }
 
-    public WordDto(String text, String partOfSpeech, String definition, Language language) {
+    public WordDto(String text, String partOfSpeech, String definition, Integer level, Language language) {
         this.text = text;
         this.partOfSpeech = partOfSpeech;
         this.definition = definition;
+        this.level = level;
         this.language = language;
     }
 
@@ -41,6 +44,14 @@ public class WordDto {
 
     public void setDefinition(String definition) {
         this.definition = definition;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public Language getLanguage() {

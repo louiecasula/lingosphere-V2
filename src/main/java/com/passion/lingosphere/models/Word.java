@@ -19,6 +19,9 @@ public class Word {
     @Column(name = "definition", length = 1000)
     private String definition;
 
+    @Column(name = "level")
+    private Integer level;
+
     @ManyToOne
     @JoinColumn(name = "language_id", nullable = false)
     private Language language;
@@ -26,10 +29,11 @@ public class Word {
     public Word() {
     }
 
-    public Word(String text, String partOfSpeech, String definition, Language language) {
+    public Word(String text, String partOfSpeech, String definition, Integer level, Language language) {
         this.text = text;
         this.partOfSpeech = partOfSpeech;
         this.definition = definition;
+        this.level = level;
         this.language = language;
     }
 
@@ -63,6 +67,14 @@ public class Word {
 
     public void setDefinition(String definition) {
         this.definition = definition;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public Language getLanguage() {
