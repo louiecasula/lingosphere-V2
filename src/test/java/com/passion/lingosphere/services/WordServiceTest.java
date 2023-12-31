@@ -83,4 +83,6 @@ public class WordServiceTest {
 
         assertThrows(Exception.class, () -> wordService.getWordById(0L));
     }
+
+    // TODO: Write test cases for getWordsOfTheDay.
 }
