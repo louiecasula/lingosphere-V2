@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
@@ -70,5 +71,21 @@ public class LanguageServiceTest {
         List<Language> actual = languageService.getAllLanguages();
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getLanguageByIdSuccessfulTest() throws Exception {
+        given(languageRepository.findById(0L)).willReturn(Optional.of(language));
+
+        Language language1 = languageService.getLanguageById(0L);
+
+        assertNotNull(language1);
+    }
+
+    @Test
+    public void getLanguageByIdFailureTest() {
+        given(languageRepository.findById(0L)).willReturn(Optional.empty());
+
+        assertThrows(Exception.class, () -> languageService.getLanguageById(0L));
     }
 }
