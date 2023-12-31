@@ -39,4 +39,9 @@ public class LanguageService {
     public List<Language> getAllLanguages() {
         return languageRepository.findAll();
     }
+
+    public Language getLanguageById(Long languageId) throws Exception {
+        return languageRepository.findById(languageId)
+                .orElseThrow(() -> new Exception("Language doesn't exist"));
+    }
 }
