@@ -86,7 +86,7 @@ public class UserLanguageServiceTest {
 //        given(languageRepository.existsById(userLanguageDto.getLanguageId())).willReturn(true);
 //        given(userLanguageRepository.existsByUserIdAndLanguageId(userLanguageDto.getUserId(), userLanguageDto.getLanguageId())).willReturn(true);
 //
-//        assertThrows(DataIntegrityViolationException.class, () -> userLanguageService.addUserLanguage(userLanguageDto));
+//        assertThrows(EntityNotFoundException.class, () -> userLanguageService.addUserLanguage(userLanguageDto));
     }
 
     @Test
@@ -104,4 +104,5 @@ public class UserLanguageServiceTest {
         assertEquals(expected, actual);
     }
 
+    // TODO: Write tests for updateUserLanguage
 }
