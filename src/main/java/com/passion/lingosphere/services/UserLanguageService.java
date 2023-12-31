@@ -29,7 +29,7 @@ public class UserLanguageService {
         this.languageRepository = languageRepository;
     }
 
-    public UserLanguage addUserLanguage(UserLanguageDto userLanguageDto) throws EntityNotFoundException, DataIntegrityViolationException {
+    public UserLanguage addUserLanguage(UserLanguageDto userLanguageDto) throws EntityNotFoundException {
         // Check if user or language don't exist
         User user = userRepository.findById(userLanguageDto.getUserId())
                 .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userLanguageDto.getUserId()));
@@ -38,7 +38,7 @@ public class UserLanguageService {
 
         // Check if language is already in the user's UserLanguageRepository
         if (userLanguageRepository.existsByUserIdAndLanguageId(userLanguageDto.getUserId(), userLanguageDto.getLanguageId())) {
-            throw new DataIntegrityViolationException("Duplicate language entry");
+            throw new EntityNotFoundException("Duplicate language entry");
         }
         // TODO: Exception for invalid proficiencyLevel?
 
@@ -56,9 +56,21 @@ public class UserLanguageService {
         return userLanguageRepository.findByUserId(userId);
     }
 
-    // TODO
     public UserLanguage updateUserLanguage(Long userId, Long languageId, UserLanguageDto userLanguageDto) {
-        return null;
+        // Check if user and language exist
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
+        Language language = languageRepository.findById(languageId)
+                .orElseThrow(() -> new EntityNotFoundException("Language not found with ID: " + languageId));
+
+        // Check if language exists in UserLanguage repo
+        UserLanguage userLanguage = userLanguageRepository.findByUserAndLanguage(user, language)
+                .orElseThrow(() -> new EntityNotFoundException("User language preference not found"));
+
+        // Update fields
+        userLanguage.setProficiencyLevel(userLanguageDto.getProficiencyLevel());
+
+        return userLanguageRepository.save(userLanguage);
     }
 
     // TODO
