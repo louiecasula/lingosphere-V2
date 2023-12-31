@@ -73,8 +73,17 @@ public class UserLanguageService {
         return userLanguageRepository.save(userLanguage);
     }
 
-    // TODO
     public void removeUserLanguage(Long userId, Long languageId) {
+        // Check if user and language exist
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
+        Language language = languageRepository.findById(languageId)
+                .orElseThrow(() -> new EntityNotFoundException("Language not found with ID: " + languageId));
 
+        // Check if language exists in UserLanguage repo
+        UserLanguage userLanguage = userLanguageRepository.findByUserAndLanguage(user, language)
+                .orElseThrow(() -> new EntityNotFoundException("User language preference not found"));
+
+        userLanguageRepository.delete(userLanguage);
     }
 }
