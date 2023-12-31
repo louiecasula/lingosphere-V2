@@ -7,12 +7,14 @@ import com.passion.lingosphere.models.UserLanguage;
 import com.passion.lingosphere.repositories.LanguageRepository;
 import com.passion.lingosphere.repositories.UserLanguageRepository;
 import com.passion.lingosphere.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Optional;
 
@@ -50,7 +52,7 @@ public class UserLanguageServiceTest {
     public void addUserLanguageSuccessfulTest() {
         given(userRepository.findById(userLanguageDto.getUserId())).willReturn(Optional.of(user));
         given(languageRepository.findById(userLanguageDto.getLanguageId())).willReturn(Optional.of(language));
-        given(userLanguageRepository.existsByLanguage_Id(userLanguageDto.getLanguageId())).willReturn(false);
+        given(userLanguageRepository.existsByUserIdAndLanguageId(userLanguageDto.getUserId(), userLanguageDto.getLanguageId())).willReturn(false);
         given(userLanguageRepository.save(any(UserLanguage.class))).willReturn(new UserLanguage(user, language, userLanguageDto.getProficiencyLevel()));
 
         UserLanguage added = userLanguageService.addUserLanguage(userLanguageDto);
@@ -63,16 +65,26 @@ public class UserLanguageServiceTest {
 
     @Test
     public void addUserLanguageUserDoesntExistTest() {
+        given(userRepository.findById(userLanguageDto.getUserId())).willReturn(Optional.empty());
 
+        assertThrows(EntityNotFoundException.class, () -> userLanguageService.addUserLanguage(userLanguageDto));
     }
 
     @Test
     public void addUserLanguageLanguageDoesntExistTest() {
+        lenient().when(languageRepository.existsById(userLanguageDto.getLanguageId())).thenReturn(false);
 
+        assertThrows(EntityNotFoundException.class, () -> userLanguageService.addUserLanguage(userLanguageDto));
     }
 
+    // TODO: Fix this test...
     @Test
     public void addUserLanguageDuplicateLanguageTest() {
-
+//        given(userRepository.existsById(userLanguageDto.getUserId())).willReturn(true);
+//        given(languageRepository.existsById(userLanguageDto.getLanguageId())).willReturn(true);
+//        given(userLanguageRepository.existsByUserIdAndLanguageId(userLanguageDto.getUserId(), userLanguageDto.getLanguageId())).willReturn(true);
+//
+//        assertThrows(DataIntegrityViolationException.class, () -> userLanguageService.addUserLanguage(userLanguageDto));
     }
+
 }
