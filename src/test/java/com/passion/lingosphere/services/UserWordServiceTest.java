@@ -13,7 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,6 +50,7 @@ public class UserWordServiceTest {
         assertEquals(word, added.getWord());
     }
 
+    // TODO: Finish these tests!
     @Test
     public void addUserWordUserDoesntExistTest() {
 
@@ -56,5 +59,20 @@ public class UserWordServiceTest {
     @Test
     public void addUserWordWordDoesntExistTest() {
 
+    }
+
+    @Test
+    public void getUserWordsTest() {
+        User user = new User();
+        Word word1 = new Word();
+        Word word2 = new Word();
+        UserWord userWord1 = new UserWord(user, word1, new Date());
+        UserWord userWord2 = new UserWord(user, word2, new Date());
+        List<UserWord> expected = Arrays.asList(userWord1, userWord2);
+        given(userWordRepository.findByUserId(user.getUserId())).willReturn(expected);
+
+        List<UserWord> actual = userWordService.getUserWords(user.getUserId());
+
+        assertEquals(expected, actual);
     }
 }

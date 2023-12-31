@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserWordService {
@@ -38,5 +39,9 @@ public class UserWordService {
 
         // Save the new user word entity
         return userWordRepository.save(newUserWord);
+    }
+
+    public List<UserWord> getUserWords(Long userId) {
+        return userWordRepository.findByUserId(userId);
     }
 }
