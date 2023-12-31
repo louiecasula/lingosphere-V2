@@ -35,13 +35,13 @@ public class WordServiceTest {
         String partOfSpeech = "test";
         String definition = "this is a test word";
         Language language = new Language("testlang", "tl");
-        wordDto = new WordDto(text, partOfSpeech, definition, language);
+        wordDto = new WordDto(text, partOfSpeech, definition, 1, language);
     }
 
     @Test
     public void addWordSuccessfulTest() throws Exception {
         given(wordRepository.existsByText(wordDto.getText())).willReturn(false);
-        given(wordRepository.save(any(Word.class))).willReturn(new Word(wordDto.getText(), wordDto.getPartOfSpeech(), wordDto.getDefinition(), wordDto.getLanguage()));
+        given(wordRepository.save(any(Word.class))).willReturn(new Word(wordDto.getText(), wordDto.getPartOfSpeech(), wordDto.getDefinition(), 1, wordDto.getLanguage()));
 
         Word added = wordService.addWord(wordDto);
 
