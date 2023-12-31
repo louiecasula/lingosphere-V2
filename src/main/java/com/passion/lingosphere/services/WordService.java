@@ -35,6 +35,11 @@ public class WordService {
         return wordRepository.save(newWord);
     }
 
+    public Word getWordById(Long wordId) throws Exception {
+         return wordRepository.findById(wordId)
+                 .orElseThrow(() -> new Exception("Word doesn't exist"));
+    }
+
     public List<Word> getWords() {
         return wordRepository.findAll();
     }
