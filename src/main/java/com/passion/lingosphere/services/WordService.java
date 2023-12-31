@@ -6,6 +6,7 @@ import com.passion.lingosphere.repositories.WordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -42,5 +43,14 @@ public class WordService {
     public Word getWordById(Long wordId) throws Exception {
          return wordRepository.findById(wordId)
                  .orElseThrow(() -> new Exception("Word doesn't exist"));
+    }
+
+    // TODO: finish this method. It's crucial to the overall functionality.
+    public HashMap<String, Word> getWordsOfTheDay(Long userId) {
+         // Get user's language preferences
+        // Select a word for each language
+        // Archive each word in UserWord
+        // Return the word(s)
+        return null;
     }
 }
