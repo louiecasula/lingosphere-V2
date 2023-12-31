@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,6 +54,18 @@ public class WordServiceTest {
         given(wordRepository.existsByText(word.getText())).willReturn(true);
 
         assertThrows(Exception.class, () -> wordService.addWord(wordDto));
+    }
+
+    @Test
+    public void getAllWordsTest() {
+        Word word1 = new Word();
+        Word word2 = new Word();
+        List<Word> expected = Arrays.asList(word1, word2);
+        given(wordRepository.findAll()).willReturn(expected);
+
+        List<Word> actual = wordService.getAllWords();
+
+        assertEquals(expected, actual);
     }
 
     @Test
