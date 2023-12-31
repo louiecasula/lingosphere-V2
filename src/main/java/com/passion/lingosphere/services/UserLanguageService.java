@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class UserLanguageService {
 
@@ -47,5 +50,19 @@ public class UserLanguageService {
 
         // Save the new user language entity
         return userLanguageRepository.save(newUserLanguage);
+    }
+
+    public List<UserLanguage> getUserLanguages(Long userId) {
+        return userLanguageRepository.findByUserId(userId);
+    }
+
+    // TODO
+    public UserLanguage updateUserLanguage(Long userId, Long languageId, UserLanguageDto userLanguageDto) {
+        return null;
+    }
+
+    // TODO
+    public void removeUserLanguage(Long userId, Long languageId) {
+
     }
 }

@@ -16,6 +16,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -85,6 +87,21 @@ public class UserLanguageServiceTest {
 //        given(userLanguageRepository.existsByUserIdAndLanguageId(userLanguageDto.getUserId(), userLanguageDto.getLanguageId())).willReturn(true);
 //
 //        assertThrows(DataIntegrityViolationException.class, () -> userLanguageService.addUserLanguage(userLanguageDto));
+    }
+
+    @Test
+    public void getUserLanguagesTest() {
+        User user = new User();
+        Language language1 = new Language();
+        Language language2 = new Language();
+        UserLanguage userLanguage1 = new UserLanguage(user, language1, 3);
+        UserLanguage userLanguage2 = new UserLanguage(user, language2, 2);
+        List<UserLanguage> expected = Arrays.asList(userLanguage1, userLanguage2);
+        given(userLanguageRepository.findByUserId(user.getUserId())).willReturn(expected);
+
+        List<UserLanguage> actual = userLanguageService.getUserLanguages(user.getUserId());
+
+        assertEquals(expected, actual);
     }
 
 }
