@@ -22,14 +22,7 @@ public class WordController {
     }
 
     @GetMapping
-    public List<Word> getWords() {
-        return wordService.getWords();
-    }
-
-    @GetMapping
-    public Word getRandomWord() {
-        Random random = new Random();
-        int index = random.nextInt(getWords().size());
-        return getWords().get(index);
+    public List<Word> getAllWords() {
+        return wordService.getAllWords();
     }
 }
