@@ -39,4 +39,10 @@ public class LanguageController {
         List<Language> languageList = languageService.getAllLanguages();
         return new ResponseEntity<>(languageList, HttpStatus.OK);
     }
+
+    @GetMapping
+    public ResponseEntity<?> getLanguageById(@PathVariable Long languageId) throws Exception {
+        Language language = languageService.getLanguageById(languageId);
+        return new ResponseEntity<>(language, HttpStatus.OK);
+    }
 }
