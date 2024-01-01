@@ -14,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +53,7 @@ public class UserLanguageServiceTest {
     public void addUserLanguageSuccessfulTest() {
         given(userRepository.findById(userLanguageDto.getUserId())).willReturn(Optional.of(user));
         given(languageRepository.findById(userLanguageDto.getLanguageId())).willReturn(Optional.of(language));
-        given(userLanguageRepository.existsByUserIdAndLanguageId(userLanguageDto.getUserId(), userLanguageDto.getLanguageId())).willReturn(false);
+        given(userLanguageRepository.existsByUser_UserIdAndLanguage_LanguageId(userLanguageDto.getUserId(), userLanguageDto.getLanguageId())).willReturn(false);
         given(userLanguageRepository.save(any(UserLanguage.class))).willReturn(new UserLanguage(user, language, userLanguageDto.getProficiencyLevel()));
 
         UserLanguage added = userLanguageService.addUserLanguage(userLanguageDto);
@@ -97,7 +96,7 @@ public class UserLanguageServiceTest {
         UserLanguage userLanguage1 = new UserLanguage(user, language1, 3);
         UserLanguage userLanguage2 = new UserLanguage(user, language2, 2);
         List<UserLanguage> expected = Arrays.asList(userLanguage1, userLanguage2);
-        given(userLanguageRepository.findByUserId(user.getUserId())).willReturn(expected);
+        given(userLanguageRepository.findByUser_UserId(user.getUserId())).willReturn(expected);
 
         List<UserLanguage> actual = userLanguageService.getUserLanguages(user.getUserId());
 
