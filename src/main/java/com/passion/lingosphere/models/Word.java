@@ -1,5 +1,6 @@
 package com.passion.lingosphere.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -22,6 +23,7 @@ public class Word {
     @Column(name = "level")
     private Integer level;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "language_id", nullable = false)
     private Language language;
