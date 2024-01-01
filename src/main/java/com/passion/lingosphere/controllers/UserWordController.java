@@ -21,7 +21,7 @@ public class UserWordController {
         this.userWordService = userWordService;
     }
 
-    @PostMapping("/{userId}/words/{wordId}")
+    @PostMapping("/{wordId}")
     public ResponseEntity<?> addUserWord(@PathVariable Long userId, @PathVariable Long wordId) {
         try {
             UserWord newUserWord = userWordService.addUserWord(userId, wordId);
