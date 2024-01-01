@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @RestController
@@ -46,5 +48,11 @@ public class WordController {
     public ResponseEntity<?> getWordById(@PathVariable Long wordId) throws Exception {
         Word word = wordService.getWordById(wordId);
         return new ResponseEntity<>(word, HttpStatus.OK);
+    }
+
+    @GetMapping("/{userId}/words-of-the-day")
+    public ResponseEntity<?> getWordsOfTheDay(@PathVariable Long userId) {
+        HashMap<String, Word> wordsOfTheDay = wordService.getWordsOfTheDay(userId);
+        return new ResponseEntity<>(wordsOfTheDay, HttpStatus.OK);
     }
 }
