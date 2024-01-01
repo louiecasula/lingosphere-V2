@@ -37,7 +37,7 @@ public class UserLanguageService {
                 .orElseThrow(() -> new EntityNotFoundException("Language not found with ID: " + userLanguageDto.getLanguageId()));
 
         // Check if language is already in the user's UserLanguageRepository
-        if (userLanguageRepository.existsByUserIdAndLanguageId(userLanguageDto.getUserId(), userLanguageDto.getLanguageId())) {
+        if (userLanguageRepository.existsByUser_UserIdAndLanguage_LanguageId(userLanguageDto.getUserId(), userLanguageDto.getLanguageId())) {
             throw new EntityNotFoundException("Duplicate language entry");
         }
         // TODO: Exception for invalid proficiencyLevel?
@@ -53,7 +53,7 @@ public class UserLanguageService {
     }
 
     public List<UserLanguage> getUserLanguages(Long userId) {
-        return userLanguageRepository.findByUserId(userId);
+        return userLanguageRepository.findByUser_UserId(userId);
     }
 
     public UserLanguage updateUserLanguage(Long userId, Long languageId, UserLanguageDto userLanguageDto) {
