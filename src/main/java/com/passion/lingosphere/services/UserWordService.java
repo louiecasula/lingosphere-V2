@@ -42,6 +42,6 @@ public class UserWordService {
     }
 
     public List<UserWord> getUserWords(Long userId) {
-        return userWordRepository.findByUserId(userId);
+        return userWordRepository.findByUser_UserId(userId);
     }
 }
