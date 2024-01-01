@@ -41,4 +41,10 @@ public class WordController {
         List<Word> wordList = wordService.getAllWords();
         return new ResponseEntity<>(wordList, HttpStatus.OK);
     }
+
+    @GetMapping("/{wordId}")
+    public ResponseEntity<?> getWordById(@PathVariable Long wordId) throws Exception {
+        Word word = wordService.getWordById(wordId);
+        return new ResponseEntity<>(word, HttpStatus.OK);
+    }
 }
