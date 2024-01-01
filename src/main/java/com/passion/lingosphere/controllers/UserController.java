@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.naming.AuthenticationException;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -32,6 +34,18 @@ public class UserController {
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>("User registration failed: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@RequestBody UserDto userDto) throws AuthenticationException {
+        try {
+            User authenticatedUser = userService.authenticateUser(userDto.getUsername(), userDto.getPassword());
+            return new ResponseEntity<>(authenticatedUser, HttpStatus.OK);
+        } catch (AuthenticationException e) {
+            return new ResponseEntity<>("Authentication failed: " + e.getMessage(), HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
