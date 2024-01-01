@@ -2,7 +2,6 @@ package com.passion.lingosphere.controllers;
 
 import com.passion.lingosphere.dtos.UserLanguageDto;
 import com.passion.lingosphere.models.UserLanguage;
-import com.passion.lingosphere.models.Word;
 import com.passion.lingosphere.services.UserLanguageService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +36,12 @@ public class UserLanguageController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getUserLanguages(Long userId) {
+    public ResponseEntity<?> getUserLanguages(@PathVariable Long userId) {
         List<UserLanguage> userLanguageList = userLanguageService.getUserLanguages(userId);
         return new ResponseEntity<>(userLanguageList, HttpStatus.OK);
     }
 
-    @PutMapping("/{userId}/languages/{languageId}")
+    @PutMapping("/{languageId}")
     public ResponseEntity<?> updateUserLanguage(@PathVariable Long userId, @PathVariable Long languageId, @RequestBody UserLanguageDto userLanguageDto) {
         try {
             UserLanguage updatedUserLanguage = userLanguageService.updateUserLanguage(userId, languageId, userLanguageDto);
@@ -54,7 +53,7 @@ public class UserLanguageController {
         }
     }
 
-    @DeleteMapping("/{userId}/languages/{languageId}")
+    @DeleteMapping("/{languageId}")
     public ResponseEntity<?> removeUserLanguage(@PathVariable Long userId, @PathVariable Long languageId) {
         try {
             userLanguageService.removeUserLanguage(userId, languageId);
