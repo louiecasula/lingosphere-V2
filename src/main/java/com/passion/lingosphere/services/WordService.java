@@ -81,7 +81,7 @@ public class WordService {
 
     private List<Word> filterUsedWords(List<Word> words, Long userId) {
         // Fetch words already assigned to the user
-        List<UserWord> userWords = userWordRepository.findByUserId(userId);
+        List<UserWord> userWords = userWordRepository.findByUser_UserId(userId);
 
         // Convert to a set of word IDs for efficient lookup
         Set<Long> userWordIds = new HashSet<>();

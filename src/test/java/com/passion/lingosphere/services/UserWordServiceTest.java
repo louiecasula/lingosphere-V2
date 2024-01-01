@@ -69,7 +69,7 @@ public class UserWordServiceTest {
         UserWord userWord1 = new UserWord(user, word1, new Date());
         UserWord userWord2 = new UserWord(user, word2, new Date());
         List<UserWord> expected = Arrays.asList(userWord1, userWord2);
-        given(userWordRepository.findByUserId(user.getUserId())).willReturn(expected);
+        given(userWordRepository.findByUser_UserId(user.getUserId())).willReturn(expected);
 
         List<UserWord> actual = userWordService.getUserWords(user.getUserId());
 
