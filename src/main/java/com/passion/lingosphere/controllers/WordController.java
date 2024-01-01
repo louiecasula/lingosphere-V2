@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Random;
 
 @RestController
-@RequestMapping(path = "/words")
+@RequestMapping("/api/words")
 public class WordController {
 
     private final WordService wordService;

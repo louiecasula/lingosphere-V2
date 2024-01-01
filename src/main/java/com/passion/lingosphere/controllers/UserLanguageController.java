@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/language_preferences")
+@RequestMapping("/api/users/{userId}/languages")
 public class UserLanguageController {
 
     private final UserLanguageService userLanguageService;
