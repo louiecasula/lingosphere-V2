@@ -22,7 +22,7 @@ document.getElementById('signup-form').addEventListener('submit', function(event
             }
 
             // Redirect to dashboard
-            window.location.href = '/dashboard.html';
+            window.location.href = '/languageselect.html';
         })
         .catch((error) => {
             console.error('Error:', error);
