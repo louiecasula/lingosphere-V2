@@ -4,10 +4,10 @@ document.getElementById('language-selection-form').addEventListener('submit', fu
     var languagePreferences = {
         language: document.getElementById('language1').value,
         proficiency: document.getElementById('proficiency1').value,
-        // Capture other language selections if applicable
+        // TODO: Allow for this to dynamically add multiple language settings
     };
 
-    // Retrieve userId from sessionStorage or other storage
+    // Retrieve userId from sessionStorage
     var userId = sessionStorage.getItem('userId');
 
     fetch(`http://localhost:8080/api/users/${userId}/languages`, {
