@@ -1,13 +1,14 @@
 document.getElementById('language-selection-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    var languagePreferences = {
-        language: document.getElementById('language1').value,
-        proficiency: document.getElementById('proficiency1').value,
-        // TODO: Allow for this to dynamically add multiple language settings
-    };
+    // This is how the JSON payload looks
+    var languagePreferences = [
+        {
+            language: document.getElementById('language1').value,
+            proficiency: parseInt(document.getElementById('proficiency1').value) // Convert to integer if necessary
+        }
+    ];
 
-    // Retrieve userId from sessionStorage
     var userId = sessionStorage.getItem('userId');
 
     fetch(`http://localhost:8080/api/users/${userId}/languages`, {
@@ -32,3 +33,4 @@ document.getElementById('language-selection-form').addEventListener('submit', fu
             // TODO: Send an error message to the user
         });
 });
+

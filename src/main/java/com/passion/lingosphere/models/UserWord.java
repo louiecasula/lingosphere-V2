@@ -1,5 +1,6 @@
 package com.passion.lingosphere.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -11,10 +12,12 @@ public class UserWord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userWordId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "word_id", nullable = false)
     private Word word;
