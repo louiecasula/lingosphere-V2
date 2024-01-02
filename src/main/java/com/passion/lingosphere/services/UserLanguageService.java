@@ -29,6 +29,22 @@ public class UserLanguageService {
         this.languageRepository = languageRepository;
     }
 
+    public void setLanguagePreferences(Long userId, List<UserLanguageDto> preferences) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
+
+        for (UserLanguageDto userLanguageDto : preferences) {
+            Language language = languageRepository.findById(userLanguageDto.getLanguageId())
+                    .orElseThrow(() -> new EntityNotFoundException("Language not found with ID: " + userLanguageDto.getLanguageId()));
+            UserLanguage userLanguage = new UserLanguage();
+            userLanguage.setUser(user);
+            userLanguage.setLanguage(language);
+            userLanguage.setProficiencyLevel(userLanguageDto.getProficiencyLevel());
+
+            userLanguageRepository.save(userLanguage);
+        }
+    }
+
     public UserLanguage addUserLanguage(UserLanguageDto userLanguageDto) throws EntityNotFoundException {
         // Check if user or language don't exist
         User user = userRepository.findById(userLanguageDto.getUserId())
