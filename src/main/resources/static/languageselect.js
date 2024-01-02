@@ -2,15 +2,16 @@ document.getElementById('language-selection-form').addEventListener('submit', fu
     event.preventDefault();
 
     // This is how the JSON payload looks
-    var languagePreferences = [
+    const languagePreferences = [
         {
             language: document.getElementById('language1').value,
             proficiency: parseInt(document.getElementById('proficiency1').value) // Convert to integer if necessary
         }
     ];
 
-    var userId = sessionStorage.getItem('userId');
+    const userId = sessionStorage.getItem('userId');
 
+    console.log("UserID:", userId);
     fetch(`http://localhost:8080/api/users/${userId}/languages`, {
         method: 'POST',
         headers: {
