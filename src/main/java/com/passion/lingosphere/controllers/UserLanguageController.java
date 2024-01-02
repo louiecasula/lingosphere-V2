@@ -24,6 +24,12 @@ public class UserLanguageController {
     }
 
     @PostMapping
+    public ResponseEntity<?> setLanguagePreferences(@PathVariable Long userId, @RequestBody List<UserLanguageDto> preferences) {
+        userLanguageService.setLanguagePreferences(userId, preferences);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/add")
     public ResponseEntity<?> addUserLanguage(@RequestBody UserLanguageDto userLanguageDto) {
         try {
             UserLanguage newUserLanguage = userLanguageService.addUserLanguage(userLanguageDto);
