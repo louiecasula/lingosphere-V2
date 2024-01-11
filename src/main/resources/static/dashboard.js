@@ -1,6 +1,7 @@
 function loadWordsOfTheDay() {
     // Retrieve userId from sessionStorage
     const userId = sessionStorage.getItem('userId');
+    console.log(userId);
 
     fetch(`http://localhost:8080/api/words/${userId}/words-of-the-day`)
         .then(response => {
