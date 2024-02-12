@@ -1,11 +1,12 @@
 import './App.css';
-// import Navbar from './components/Navbar'
-import SignIn from './components/SignIn'
+import Navbar from './components/Navbar'
+
+console.log(sessionStorage.getItem('userId'));
+console.log(sessionStorage.getItem('username'));
 
 function App() {
   return (
-    // <Navbar />
-    <SignIn />
+    <Navbar />
   );
 }
 
