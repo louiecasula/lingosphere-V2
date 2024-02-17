@@ -12,17 +12,35 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { loginUser } from '../api/userApi';
 
 const defaultTheme = createTheme();
+
+
 
 export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const email = data.get('email');
+    const password = data.get('password');
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      email: email,
+      password: password,
     });
+
+    loginUser(email, password)
+      .then(data => {
+        console.log('Success:', data);
+                if (data.userId) {
+                    sessionStorage.setItem('userId', data.userId);
+                    sessionStorage.setItem('username', data.username);
+                    window.location.href = '/';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
   };
 
   return (

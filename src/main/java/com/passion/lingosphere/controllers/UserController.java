@@ -42,7 +42,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody UserDto userDto) throws AuthenticationException {
         try {
-            User authenticatedUser = userService.authenticateUser(userDto.getUsername(), userDto.getPassword());
+            User authenticatedUser = userService.authenticateUser(userDto.getEmail(), userDto.getPassword());
             return new ResponseEntity<>(authenticatedUser, HttpStatus.OK);
         } catch (AuthenticationException e) {
             return new ResponseEntity<>("Authentication failed: " + e.getMessage(), HttpStatus.UNAUTHORIZED);

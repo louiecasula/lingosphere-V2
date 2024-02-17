@@ -43,10 +43,10 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public User authenticateUser(String username, String password) throws AuthenticationException {
+    public User authenticateUser(String email, String password) throws AuthenticationException {
         // Check that the user's username and password exist
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new AuthenticationException("Username doesn't exist"));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new AuthenticationException("Email doesn't exist"));
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new AuthenticationException("Password doesn't match");
         }
