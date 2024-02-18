@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { registerUser } from '../api/userApi';
 
 const defaultTheme = createTheme();
 
@@ -17,10 +18,29 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const username = data.get('username');
+    const email = data.get('email');
+    const password = data.get('password');
+    const confirmPassword = data.get('confirm-password');
+
+    if (password !== confirmPassword) {
+      console.log("Passwords don't match");
+      return;
+    }
+
+    registerUser({ username, email, password })
+            .then(data => {
+                console.log('Success:', data);
+                if (data.userId) {
+                    sessionStorage.setItem('userId', data.userId);
+                    sessionStorage.setItem('username', data.username);
+                    window.location.href = '/';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // TODO: Send an error message to the user
+            });
   };
 
   return (
@@ -43,27 +63,6 @@ export default function SignUp() {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
