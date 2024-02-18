@@ -35,6 +35,12 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () => {
+    sessionStorage.clear();
+    handleCloseUserMenu();
+    window.location.reload();
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -148,7 +154,7 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={setting === 'Logout' ? handleLogout : handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
