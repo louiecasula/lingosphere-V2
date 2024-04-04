@@ -1,0 +1,11 @@
+.lang-prof-box {
+    height: 50%;
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #FFFFFFC0;
+    border-radius: 10px;
+}
