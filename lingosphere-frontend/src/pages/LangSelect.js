@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Grid, Button, Modal, Box, Typography } from '@mui/material';
+import { addUserLanguage } from '../api/userLanguageApi';
+import './LangSelect.css';
 
 const languageOptions = [
-  { code: 'en', name: 'English' },
-  { code: 'es', name: 'Spanish' },
+  { id: 1, code: 'EN', name: 'English' },
+  { id: 2, code: 'ES', name: 'Spanish' },
   // ...other languages
 ];
 
@@ -26,7 +28,8 @@ export default function LanguageSelection() {
   const handleProficiencySelect = (level) => {
     setProficiencyLevel(level);
     setModalOpen(false);
-    // Here you would also save the selected language and level to your state
+    // If user has already added the language, make a PUT request
+    // Else, make a POST request/
   };
 
   const renderLanguageButtons = () => {
@@ -46,7 +49,7 @@ export default function LanguageSelection() {
       </Grid>
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <Box>
+        <Box className="lang-prof-box">
           <Typography>Select your proficiency level for {selectedLanguage?.name}:</Typography>
           {Object.entries(proficiencyDescriptions).map(([level, description]) => (
             <Button key={level} onClick={() => handleProficiencySelect(level)}>
