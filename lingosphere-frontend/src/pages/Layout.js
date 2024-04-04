@@ -1,5 +1,5 @@
 import './Layout.css';
-import Navbar from './components/Navbar'
+import Navbar from '../components/Navbar'
 
 console.log(sessionStorage.getItem('userId'));
 console.log(sessionStorage.getItem('username'));

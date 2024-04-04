@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Layout from './Layout';
+import Layout from './pages/Layout';
 import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
-import LangSelect from "./components/LangSelect";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import LangSelect from "./pages/LangSelect";
 
 const ProtectedRoute = ({ children }) => {
     if (!sessionStorage.getItem("userId")) {

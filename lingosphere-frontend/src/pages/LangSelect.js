@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, Button, Modal, Box, Typography } from '@mui/material';
-import Navbar from './Navbar';
+import Navbar from '../components/Navbar';
 
 const languageOptions = [
   { code: 'en', name: 'English' },
