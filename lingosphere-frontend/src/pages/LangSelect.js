@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Grid, Button, Modal, Box, Typography } from '@mui/material';
-import Navbar from '../components/Navbar';
 
 const languageOptions = [
   { code: 'en', name: 'English' },
@@ -42,7 +41,6 @@ export default function LanguageSelection() {
 
   return (
     <>
-      <Navbar />
       <Grid container spacing={2}>
         {renderLanguageButtons()}
       </Grid>
