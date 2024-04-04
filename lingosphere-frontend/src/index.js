@@ -6,6 +6,8 @@ import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import LangSelect from "./pages/LangSelect";
+import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard";
 
 const ProtectedRoute = ({ children }) => {
     if (!sessionStorage.getItem("userId")) {
@@ -24,8 +26,8 @@ root.render(
                 <Route path="/signin" element={<SignIn />} />
                 <Route element={<ProtectedRoute />} />
                     <Route element={<Layout />}>
-                        <Route path="/profile" />
-                        <Route path="/"/>
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/" element={<Dashboard />} />
                         <Route path="/language-select" element={<LangSelect />} />
                     </Route>
             </Routes>
