@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Layout from './Layout';
 import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
@@ -22,13 +22,12 @@ root.render(
             <Routes>
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/signin" element={<SignIn />} />
-                <Route path="/" element={
-                    <ProtectedRoute>
-                        <App />
-                    </ProtectedRoute>
-                }>
-                </Route>
-                <Route path="/language-select" element={<LangSelect />} />
+                <Route element={<ProtectedRoute />} />
+                    <Route element={<Layout />}>
+                        <Route path="/profile" />
+                        <Route path="/"/>
+                        <Route path="/language-select" element={<LangSelect />} />
+                    </Route>
             </Routes>
         </Router>
     </React.StrictMode>
