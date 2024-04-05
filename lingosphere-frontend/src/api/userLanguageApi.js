@@ -26,7 +26,7 @@ export function getUserLanguages(userData) {
 export function addUserLanguage(userData) {
     const { userId, languageId, proficiencyLevel } = userData;
 
-    return fetch(`${API_BASE_URL}/${userId}/languages`, {
+    return fetch(`${API_BASE_URL}/${userId}/languages/add`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
