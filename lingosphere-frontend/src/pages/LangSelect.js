@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button, Modal, Box, Typography } from '@mui/material';
-import { getUserLanguages, addUserLanguage } from '../api/userLanguageApi';
+import { getUserLanguages, addUserLanguage, updateUserLanguage } from '../api/userLanguageApi';
 import './LangSelect.css';
 
 const languageOptions = [
@@ -36,9 +36,10 @@ export default function LanguageSelection() {
   const handleProficiencySelect = (level) => {
     setProficiencyLevel(level);
     setModalOpen(false);
+
     // If user has already added the language, (make a PUT request)
-    if (languages.includes(selectedLanguage)) {
-      console.log(languages); // TODO: Add PUT request
+    if (languages.some(language => language.userLanguageId === selectedLanguage.id)) {
+      updateUserLanguage({userId, languageId: selectedLanguage.id, proficiencyLevel: level});
     }
     // Else, add it (make a POST request)
     else {
