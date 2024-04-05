@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8080/api/users/';
+const API_BASE_URL = 'http://localhost:8080/api/users';
 
 export function addUserLanguage(userData) {
     const { userId, languageId, proficiencyLevel } = userData;
