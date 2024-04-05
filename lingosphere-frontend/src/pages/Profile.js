@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getUserWords } from '../api/userWordApi';
+import './Profile.css';
 
 export default function Profile() {
     const [words, setWords] = useState([]);
@@ -12,10 +13,17 @@ export default function Profile() {
     }, []);
 
     return (
-        <div>
+        <table>
+            <tr>
+                <th>Word</th>
+                <th>Date Received</th>
+            </tr>
             {words.map((word, index) => (
-                <div key={index}>{word}</div>
+                <tr key={index}>
+                    <td>{word.userWordId}</td>
+                    <td>{word.dateSent}</td>
+                </tr>
             ))}
-        </div>
+        </table>
     );
 };
