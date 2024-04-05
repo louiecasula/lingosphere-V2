@@ -46,3 +46,27 @@ export function addUserLanguage(userData) {
             throw error;
         });
 }
+
+export function updateUserLanguage(userData) {
+    const { userId, languageId, proficiencyLevel } = userData;
+
+    return fetch(`${API_BASE_URL}/${userId}/languages/${languageId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId, languageId, proficiencyLevel })
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(`Server error: ${data.message || response.status}`);
+                });
+            }
+            return response.json();
+        })
+        .catch((error) => {
+            console.error('Error adding language for user:', error);
+            throw error;
+        });
+}
