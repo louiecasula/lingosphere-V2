@@ -16,13 +16,13 @@ const proficiencyDescriptions = {
 };
 
 export default function LanguageSelection() {
+  const userId = sessionStorage.getItem('userId');
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [proficiencyLevel, setProficiencyLevel] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
-    const userId = sessionStorage.getItem('userId');
     getUserLanguages({userId}).then(languagesFetched => {
         setLanguages(languagesFetched);
     }).catch(error => console.error(error));
@@ -36,11 +36,14 @@ export default function LanguageSelection() {
   const handleProficiencySelect = (level) => {
     setProficiencyLevel(level);
     setModalOpen(false);
-    // If user has already added the language, make a PUT request
+    // If user has already added the language, (make a PUT request)
     if (languages.includes(selectedLanguage)) {
       console.log(languages); // TODO: Add PUT request
     }
-    // Else, make a POST request/
+    // Else, add it (make a POST request)
+    else {
+      addUserLanguage({userId, languageId: selectedLanguage.id, proficiencyLevel: level});
+    }
   };
 
   const renderLanguageButtons = () => {
