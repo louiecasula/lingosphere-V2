@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getWordsOfTheDay } from '../api/wordApi';
+import { generateWordsOfTheDay } from '../api/wordApi';
 
 export default function Dashboard() {
     const [words, setWords] = useState([]);

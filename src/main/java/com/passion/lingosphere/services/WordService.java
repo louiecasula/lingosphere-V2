@@ -57,7 +57,7 @@ public class WordService {
     }
 
     // TODO: finish this method. It's crucial to the overall functionality.
-    public HashMap<String, Word> getWordsOfTheDay(Long userId) {
+    public HashMap<String, Word> generateWordsOfTheDay(Long userId) {
          // Get user's language preferences
         HashMap<String, Word> wordsOfTheDay = new HashMap<>();
         List<UserLanguage> userLanguages = userLanguageService.getUserLanguages(userId);

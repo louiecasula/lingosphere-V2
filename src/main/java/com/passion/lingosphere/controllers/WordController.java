@@ -51,8 +51,8 @@ public class WordController {
     }
 
     @GetMapping("/{userId}/words-of-the-day")
-    public ResponseEntity<?> getWordsOfTheDay(@PathVariable Long userId) {
-        HashMap<String, Word> wordsOfTheDay = wordService.getWordsOfTheDay(userId);
+    public ResponseEntity<?> generateWordsOfTheDay(@PathVariable Long userId) {
+        HashMap<String, Word> wordsOfTheDay = wordService.generateWordsOfTheDay(userId);
         return new ResponseEntity<>(wordsOfTheDay, HttpStatus.OK);
     }
 }

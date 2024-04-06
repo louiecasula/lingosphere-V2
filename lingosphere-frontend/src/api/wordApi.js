@@ -1,6 +1,6 @@
 const API_BASE_URL = 'http://localhost:8080/api/words';
 
-export function getWordsOfTheDay(userData) {
+export function generateWordsOfTheDay(userData) {
     const { userId } = userData;
 
     return fetch(`${API_BASE_URL}/${userId}/words-of-the-day`, {
