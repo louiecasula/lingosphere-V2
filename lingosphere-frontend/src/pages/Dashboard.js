@@ -16,11 +16,14 @@ export default function Dashboard() {
         }).catch(error => console.error(error));    
     }, []); */
 
-    /* return (
-        <div>
+    return (
+        <>
+            <h1>Your Words of The Day</h1>
+            <div>
             {words.map((word, index) => (
                 <div key={index}>{word}</div>
             ))}
-        </div>
-    ); */
+            </div>
+        </>
+    ); 
 }; 
