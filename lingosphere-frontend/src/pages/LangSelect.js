@@ -46,12 +46,14 @@ export default function LanguageSelection() {
       addUserLanguage({userId, languageId: selectedLanguage.id, proficiencyLevel: level});
     }
   };
-
   const renderLanguageButtons = () => {
     return languageOptions.map((language) => (
       <Grid item key={language.code}>
         <Button onClick={() => handleLanguageSelect(language)}>
-          {language.name}
+          <div class="lang-button">
+            <img src={require(`../images/flags/${language.name.toLowerCase()}.svg`)} alt={language.name} />
+            {language.name}
+          </div>
         </Button>
       </Grid>
     ));
