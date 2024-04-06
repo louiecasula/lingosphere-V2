@@ -1,3 +1,7 @@
+h1 {
+    text-align: center;
+}
+
 .lang-prof-box {
     height: 50%;
     display: flex;
