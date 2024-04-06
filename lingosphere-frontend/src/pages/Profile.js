@@ -13,21 +13,24 @@ export default function Profile() {
     }, []);
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Word</th>
-                    <th>Date Received</th>
-                </tr>
-            </thead>
-            <tbody>
-                {words.map((word, index) => (
-                    <tr key={index}>
-                        <td>{word.userWordId}</td>
-                        <td>{word.dateSent}</td>
+        <>
+            <h1>Word History</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Word</th>
+                        <th>Date Received</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {words.map((word, index) => (
+                        <tr key={index}>
+                            <td>{word.userWordId}</td>
+                            <td>{word.dateSent}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </>
     );
 };
