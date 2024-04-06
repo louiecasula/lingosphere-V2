@@ -50,7 +50,7 @@ export default function LanguageSelection() {
     return languageOptions.map((language) => (
       <Grid item key={language.code}>
         <Button onClick={() => handleLanguageSelect(language)}>
-          <div class="lang-button">
+          <div className="lang-button">
             <img src={require(`../images/flags/${language.name.toLowerCase()}.svg`)} alt={language.name} />
             {language.name}
           </div>
