@@ -25,7 +25,7 @@ export default function Profile() {
                 <tbody>
                     {words.map((word, index) => (
                         <tr key={index}>
-                            <td>{word.userWordId}</td>
+                            <td>{word.word.text}</td>
                             <td>{word.dateSent}</td>
                         </tr>
                     ))}
