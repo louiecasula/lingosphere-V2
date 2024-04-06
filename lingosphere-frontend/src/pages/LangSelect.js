@@ -61,6 +61,7 @@ export default function LanguageSelection() {
 
   return (
     <>
+      <h1>Language Settings</h1>
       <Grid container spacing={2}>
         {renderLanguageButtons()}
       </Grid>
