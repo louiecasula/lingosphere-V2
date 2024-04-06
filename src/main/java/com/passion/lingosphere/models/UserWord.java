@@ -17,7 +17,6 @@ public class UserWord {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "word_id", nullable = false)
     private Word word;
