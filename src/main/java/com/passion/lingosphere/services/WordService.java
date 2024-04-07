@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.time.LocalDate;
 
 @Service
 public class WordService {
@@ -56,21 +57,32 @@ public class WordService {
                  .orElseThrow(() -> new Exception("Word doesn't exist"));
     }
 
-    // TODO: finish this method. It's crucial to the overall functionality.
     public HashMap<String, Word> generateWordsOfTheDay(Long userId) {
          // Get user's language preferences
         HashMap<String, Word> wordsOfTheDay = new HashMap<>();
         List<UserLanguage> userLanguages = userLanguageService.getUserLanguages(userId);
+        List<UserWord> userWordsForTheDay = userWordRepository.findByDateSent(LocalDate.now());
 
         // Select a word for each language
         for (UserLanguage userLanguage : userLanguages) {
+            // If the user already has a word in a language for the day, use that word
+            boolean isAlreadyWord = false;
+            for (UserWord userWord : userWordsForTheDay) {
+                if (userWord.getWord().getLanguage().getCode().equals(userLanguage.getLanguage().getCode())) {
+                    wordsOfTheDay.put(userLanguage.getLanguage().getName(), userWord.getWord());
+                    isAlreadyWord = true;
+                    break;
+                }
+            }
+            if (isAlreadyWord) { continue; }
+            // Else, pick a new unused word
             List<Word> eligibleWords = wordRepository.findWordsByLanguageAndLevel(userLanguage.getLanguage(), userLanguage.getProficiencyLevel());
             List<Word> unusedWords = filterUsedWords(eligibleWords, userId);
 
             // Archive each word in UserWord
             if (!unusedWords.isEmpty()) {
                 Word wordOfTheDay = selectRandomWord(unusedWords);
-                wordsOfTheDay.put(userLanguage.getLanguage().getCode(), wordOfTheDay);
+                wordsOfTheDay.put(userLanguage.getLanguage().getName(), wordOfTheDay);
                 recordWordForUser(userId, wordOfTheDay);
             }
         }
@@ -101,8 +113,7 @@ public class WordService {
     private void recordWordForUser(Long userId, Word word) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
-         UserWord userWord = new UserWord(user, word, new Date());
+         UserWord userWord = new UserWord(user, word, LocalDate.now());
          userWordRepository.save(userWord);
     }
-
 }
