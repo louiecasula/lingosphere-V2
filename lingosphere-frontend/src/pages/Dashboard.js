@@ -12,20 +12,22 @@ export default function Dashboard() {
         // If language doesn't have a word assigned for the day, assign one
         // Display the language's word for the day
 
-    /* useEffect(() => {
+    useEffect(() => {
         const userId = sessionStorage.getItem('userId');
-        getWordsOfTheDay({userId}).then(wordsFetched => {
+        generateWordsOfTheDay({userId}).then(wordsFetched => {
             setWords(wordsFetched);
         }).catch(error => console.error(error));    
-    }, []); */
+    }, {});
 
     return (
         <>
             <h1>Your Words of The Day</h1>
             <div>
-            {words.map((word, index) => (
-                <div key={index}>{word}</div>
-            ))}
+                {Object.entries(words).map(([lang, word]) => (
+                    <div key={lang}>
+                        <strong>{lang}:</strong> {word.text}
+                    </div>
+                ))}
             </div>
         </>
     ); 
