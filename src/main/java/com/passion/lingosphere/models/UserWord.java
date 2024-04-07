@@ -2,7 +2,7 @@ package com.passion.lingosphere.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_words")
@@ -23,12 +23,12 @@ public class UserWord {
 
     @Column(name = "date_sent")
     @Temporal(TemporalType.DATE)
-    private Date dateSent;
+    private LocalDate dateSent;
 
     public UserWord() {
     }
 
-    public UserWord(User user, Word word, Date dateSent) {
+    public UserWord(User user, Word word, LocalDate dateSent) {
         this.user = user;
         this.word = word;
         this.dateSent = dateSent;
@@ -58,11 +58,11 @@ public class UserWord {
         this.word = word;
     }
 
-    public Date getDateSent() {
+    public LocalDate getDateSent() {
         return dateSent;
     }
 
-    public void setDateSent(Date dateSent) {
+    public void setDateSent(LocalDate dateSent) {
         this.dateSent = dateSent;
     }
 }
