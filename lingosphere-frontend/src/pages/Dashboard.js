@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Dashboard.css';
 import { generateWordsOfTheDay } from '../api/wordApi';
 
 export default function Dashboard() {
