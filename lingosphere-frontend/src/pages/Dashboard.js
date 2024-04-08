@@ -30,8 +30,16 @@ export default function Dashboard() {
             <h1>{headerTitle}</h1>
             <div className="wotd-container">
                 {Object.entries(words).map(([lang, word]) => (
-                    <div key={lang}>
-                        <strong>{lang}:</strong> {word.text}
+                    <div className="wotd">
+                        <div className="lang" key={lang}>
+                            <strong>{lang}:</strong>
+                        </div>
+                        <div className="word">
+                            <h1>{word.text}</h1>
+                            <hr/>
+                            <i>{word.partOfSpeech}pos</i>
+                            <br/>{word.definition}this is the definition of the word
+                        </div>
                     </div>
                 ))}
             </div>
