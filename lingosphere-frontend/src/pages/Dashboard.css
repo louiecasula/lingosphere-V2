@@ -15,11 +15,11 @@
     margin: 1.5em;
 }
 
-a {
+.wotd a {
     text-decoration: none;
     color: inherit;
 }
 
-a:hover {
+.wotd a:hover {
     opacity: 0.7;
 }
