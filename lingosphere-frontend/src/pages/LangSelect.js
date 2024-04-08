@@ -49,11 +49,9 @@ export default function LanguageSelection() {
   const renderLanguageButtons = () => {
     return languageOptions.map((language) => (
       <Grid item key={language.code}>
-        <Button onClick={() => handleLanguageSelect(language)}>
-          <div className="lang-button">
+        <Button className="lang-button" onClick={() => handleLanguageSelect(language)}>
             <img className="flag-icon" src={require(`../images/flags/${language.name.toLowerCase()}.svg`)} alt={language.name} />
-            {language.name}
-          </div>
+            <h6>{language.name}</h6>
         </Button>
       </Grid>
     ));
