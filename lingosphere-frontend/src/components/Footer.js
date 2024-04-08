@@ -17,7 +17,7 @@ function Footer() {
             <p>Copyright © 2024 The Leuth
                 <a href="https://github.com/louiecasula" target="_blank">
                     <i ref={iconRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-                    class="fa fa-github" aria-hidden="true"></i>
+                    className="fa fa-github" aria-hidden="true"></i>
                 </a>
             </p>
         </footer>
