@@ -3,6 +3,7 @@ package com.passion.lingosphere.models;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "languages")
@@ -18,6 +19,7 @@ public class Language {
     @Column(name = "code", nullable = false, unique = true)
     private String code;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "language", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Word> words = new HashSet<>();
 
