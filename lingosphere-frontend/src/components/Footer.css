@@ -6,6 +6,30 @@ footer {
     font-size: 1.1em;
 }
 
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinBack {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
 footer i {
     color: black;
+    margin-left: 0.4em;
+    animation: none 0.4s linear forwards;
+}
+
+footer i:hover {
+    animation: spin 0.4s linear forwards;
 }
