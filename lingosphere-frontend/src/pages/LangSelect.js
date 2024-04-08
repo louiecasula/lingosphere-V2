@@ -51,7 +51,7 @@ export default function LanguageSelection() {
       <Grid item key={language.code}>
         <Button className="lang-button" onClick={() => handleLanguageSelect(language)}>
             <img className="flag-icon" src={require(`../images/flags/${language.name.toLowerCase()}.svg`)} alt={language.name} />
-            <h6>{language.name}</h6>
+            <h3>{language.name}</h3>
         </Button>
       </Grid>
     ));
