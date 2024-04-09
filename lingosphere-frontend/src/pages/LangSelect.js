@@ -64,7 +64,7 @@ export default function LanguageSelection() {
         {renderLanguageButtons()}
       </Grid>
 
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+      <Modal className="lang-modal" open={modalOpen} onClose={() => setModalOpen(false)}>
         <Box className="lang-prof-box">
           <Typography>Select your proficiency level for {selectedLanguage?.name}:</Typography>
           {Object.entries(proficiencyDescriptions).map(([level, description]) => (
