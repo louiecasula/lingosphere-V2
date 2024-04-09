@@ -66,7 +66,7 @@ export default function LanguageSelection() {
 
       <Modal className="lang-modal" open={modalOpen} onClose={() => setModalOpen(false)}>
         <Box className="lang-prof-box">
-          <Typography>Select your proficiency level for {selectedLanguage?.name}:</Typography>
+          <Typography>Select your proficiency level for <strong>{selectedLanguage?.name}</strong>:</Typography>
           {Object.entries(proficiencyDescriptions).map(([level, description]) => (
             <Button key={level} onClick={() => handleProficiencySelect(level)}>
               {level} - {description}
