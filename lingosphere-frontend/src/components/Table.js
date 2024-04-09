@@ -10,8 +10,6 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import { visuallyHidden } from '@mui/utils';
 import { getUserWords } from '../api/userWordApi';
 // import './Table.css';
@@ -61,12 +59,6 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  {
-    id: 'id',
-    numeric: true,
-    disablePadding: true,
-    label: 'Id',
-  },
   {
     id: 'text',
     numeric: false,
@@ -206,14 +198,6 @@ export default function EnhancedTable() {
                     key={row.id}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                    >
-                      {row.id}
-                    </TableCell>
                     <TableCell align="right">{row.text}</TableCell>
                     <TableCell align="right">{row.language}</TableCell>
                     <TableCell align="right">{row.level}</TableCell>
