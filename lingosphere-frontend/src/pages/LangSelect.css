@@ -2,20 +2,26 @@ h1 {
     text-align: center;
 }
 
-.lang-prof-box {
-    height: 50%;
+.lang-modal {
     display: flex;
-    flex: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.lang-prof-box {
+    width: 350px;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    background-color: #FFFFFFC0;
+    background-color: #FFFFFFF0;
     border-radius: 10px;
+    padding: 20px;
 }
 
 .lang-container {
-    width: 100%;
+    width: 70%;
     flex: auto;
     flex-direction: row;
     justify-content: center;
