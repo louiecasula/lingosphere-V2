@@ -61,7 +61,7 @@ public class WordService {
          // Get user's language preferences
         HashMap<String, Word> wordsOfTheDay = new HashMap<>();
         List<UserLanguage> userLanguages = userLanguageService.getUserLanguages(userId);
-        List<UserWord> userWordsForTheDay = userWordRepository.findByDateSent(LocalDate.now());
+        List<UserWord> userWordsForTheDay = userWordRepository.findByDateSentAndUser_UserId(LocalDate.now(), userId);
 
         // Select a word for each language
         for (UserLanguage userLanguage : userLanguages) {
