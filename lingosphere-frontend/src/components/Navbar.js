@@ -15,7 +15,7 @@ import PublicIcon from '@mui/icons-material/Public';
 import { useNavigate } from 'react-router-dom';
 
 const pages = [];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Word History', 'Settings', 'Logout'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -40,14 +40,11 @@ function Navbar() {
 
   const handleSettingClick = (setting) => {
     switch (setting) {
-      case 'Profile':
+      case 'Word History':
         navigate('/profile');
         break;
-      case 'Account':
+      case 'Settings':
         navigate('/language-select');
-        break;
-      case 'Dashboard':
-        navigate('/');
         break;
       case 'Logout':
         handleLogout();
@@ -70,7 +67,7 @@ function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            // href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
