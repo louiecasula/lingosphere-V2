@@ -94,7 +94,7 @@ const headCells = [
     label: 'Proficiency',
   },
   {
-    id: 'date',
+    id: 'dateSent',
     numeric: false,
     disablePadding: false,
     label: 'Date Received',
