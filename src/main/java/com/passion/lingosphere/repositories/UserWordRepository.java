@@ -11,5 +11,5 @@ import java.time.LocalDate;
 public interface UserWordRepository extends JpaRepository<UserWord, Long> {
     List<UserWord> findByUser_UserId(Long userId);
 
-    List<UserWord> findByDateSent(LocalDate LocalDate);
+    List<UserWord> findByDateSentAndUser_UserId(LocalDate LocalDate, Long userId);
 }
