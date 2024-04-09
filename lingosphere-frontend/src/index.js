@@ -23,9 +23,9 @@ root.render(
                 <Route path="/signin" element={<SignIn />} />
                 <Route element={<ProtectedRoute />}>
                     <Route element={<Layout />}>
-                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/word-history" element={<Profile />} />
                         <Route path="/" element={<Dashboard />} />
-                        <Route path="/language-select" element={<LangSelect />} />
+                        <Route path="/settings" element={<LangSelect />} />
                     </Route>
                 </Route>
             </Routes>

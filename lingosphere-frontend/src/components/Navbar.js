@@ -41,10 +41,10 @@ function Navbar() {
   const handleSettingClick = (setting) => {
     switch (setting) {
       case 'Word History':
-        navigate('/profile');
+        navigate('/word-history');
         break;
       case 'Settings':
-        navigate('/language-select');
+        navigate('/settings');
         break;
       case 'Logout':
         handleLogout();
