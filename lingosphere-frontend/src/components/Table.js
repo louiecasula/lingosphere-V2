@@ -60,16 +60,16 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'text',
-    numeric: false,
-    disablePadding: false,
-    label: 'Word',
-  },
-  {
     id: 'language',
     numeric: false,
     disablePadding: false,
     label: 'Language',
+  },
+  {
+    id: 'text',
+    numeric: false,
+    disablePadding: false,
+    label: 'Word',
   },
   {
     id: 'level',
@@ -198,8 +198,8 @@ export default function EnhancedTable() {
                     key={row.id}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <TableCell align="right">{row.text}</TableCell>
                     <TableCell align="right">{row.language}</TableCell>
+                    <TableCell align="right">{row.text}</TableCell>
                     <TableCell align="right">{row.level}</TableCell>
                     <TableCell align="right">{row.dateSent}</TableCell>
                   </TableRow>
