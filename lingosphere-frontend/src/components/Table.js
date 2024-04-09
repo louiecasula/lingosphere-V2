@@ -70,7 +70,7 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'userWordId',
+    id: 'id',
     numeric: true,
     disablePadding: true,
     label: 'Id',
