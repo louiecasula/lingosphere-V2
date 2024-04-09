@@ -171,11 +171,11 @@ export default function EnhancedTable() {
   );
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <Paper sx={{ width: '70%', mb: 2 }}>
         <TableContainer>
           <Table
-            sx={{ minWidth: 750 }}
+            sx={{ minWidth: 500 }}
             aria-labelledby="tableTitle"
             size='small'
           >
