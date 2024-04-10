@@ -4,8 +4,6 @@ import com.passion.lingosphere.models.Language;
 import com.passion.lingosphere.models.User;
 import com.passion.lingosphere.models.UserLanguage;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
