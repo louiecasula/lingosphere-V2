@@ -1,7 +1,6 @@
 package com.passion.lingosphere.dtos;
 
 import com.passion.lingosphere.models.Language;
-import jakarta.persistence.criteria.CriteriaBuilder;
 
 public class WordDto {
 
