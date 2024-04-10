@@ -1,7 +1,5 @@
 package com.passion.lingosphere.dtos;
 
-import com.passion.lingosphere.models.Language;
-
 public class UserLanguageDto {
 
     private Long userId;
