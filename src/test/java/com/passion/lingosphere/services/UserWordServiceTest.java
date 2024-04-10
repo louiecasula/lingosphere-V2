@@ -12,9 +12,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.cglib.core.Local;
 
 import java.util.Arrays;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +42,7 @@ public class UserWordServiceTest {
     public void addUserWordSuccessfulTest() {
         given(userRepository.findById(0L)).willReturn(Optional.of(user));
         given(wordRepository.findById(0L)).willReturn(Optional.of(word));
-        given(userWordRepository.save(any(UserWord.class))).willReturn(new UserWord(user, word, new Date()));
+        given(userWordRepository.save(any(UserWord.class))).willReturn(new UserWord(user, word, LocalDate.now()));
 
         UserWord added = userWordService.addUserWord(0L, 0L);
 
@@ -66,8 +67,8 @@ public class UserWordServiceTest {
         User user = new User();
         Word word1 = new Word();
         Word word2 = new Word();
-        UserWord userWord1 = new UserWord(user, word1, new Date());
-        UserWord userWord2 = new UserWord(user, word2, new Date());
+        UserWord userWord1 = new UserWord(user, word1, LocalDate.now());
+        UserWord userWord2 = new UserWord(user, word2, LocalDate.now());
         List<UserWord> expected = Arrays.asList(userWord1, userWord2);
         given(userWordRepository.findByUser_UserId(user.getUserId())).willReturn(expected);
 
