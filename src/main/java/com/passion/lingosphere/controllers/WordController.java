@@ -1,7 +1,6 @@
 package com.passion.lingosphere.controllers;
 
 import com.passion.lingosphere.dtos.WordDto;
-import com.passion.lingosphere.models.Language;
 import com.passion.lingosphere.models.Word;
 import com.passion.lingosphere.services.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 @RestController
 @RequestMapping("/api/words")
