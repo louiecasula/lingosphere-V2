@@ -10,7 +10,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -35,7 +35,7 @@ public class UserWordService {
                 .orElseThrow(() -> new EntityNotFoundException("Word not found with ID: " + wordId));
 
         // Create new UserWord entity
-        UserWord newUserWord = new UserWord(user, word, new Date());
+        UserWord newUserWord = new UserWord(user, word, LocalDate.now());
 
         // Save the new user word entity
         return userWordRepository.save(newUserWord);
