@@ -138,7 +138,7 @@ export default function EnhancedTable() {
     const userId = sessionStorage.getItem('userId');
     getUserWords({userId}).then(wordsFetched => {
         const newRows = wordsFetched.map(createData);
-        setWords(newRows); // Set the fetched words as your rows
+        setWords(newRows); // Set the fetched words as rows
     }).catch(error => console.error(error));
   }, []);
 
@@ -173,7 +173,7 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <Paper sx={{ width: '70%', mb: 2 }}>
-        <TableContainer>
+        <TableContainer style={{ overflowX: 'hidden' }}>
           <Table
             sx={{ minWidth: 500 }}
             aria-labelledby="tableTitle"
