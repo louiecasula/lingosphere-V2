@@ -43,5 +43,7 @@ h1 {
 }
 
 .flag-icon {
+    border: black solid 2px;
     border-radius: 20px;
+    box-shadow: black 0px 0px 5px 1px;
 }
