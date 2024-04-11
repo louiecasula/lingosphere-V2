@@ -12,11 +12,12 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
 import { getUserWords } from '../api/userWordApi';
-// import './Table.css';
+import { useNavigate } from 'react-router-dom';
 
 function createData(word) {
     return {
       id: word.userWordId,
+      wordId: word.word.wordId,
       text: word.word.text,
       language: word.word.language.name,
       level: word.word.level,
@@ -133,6 +134,7 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [words, setWords] = React.useState([]);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const userId = sessionStorage.getItem('userId');
@@ -156,6 +158,10 @@ export default function EnhancedTable() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  const handleWordClick = (wordId) => {
+    navigate(`../words/${wordId}`);
+  }
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -192,7 +198,7 @@ export default function EnhancedTable() {
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => console.log("YO")} // TODO: Redirect to the selected word's page
+                    onClick={() => handleWordClick(row.wordId)}
                     role="checkbox"
                     tabIndex={-1}
                     key={row.id}
