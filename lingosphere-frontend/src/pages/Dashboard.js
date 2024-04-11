@@ -35,7 +35,7 @@ export default function Dashboard() {
                             <strong>{lang}:</strong>
                         </div>
                         <div className="word">
-                            <a href=""><h1>{word.text}</h1></a>
+                            <a href={`/words/${word.wordId}`}><h1>{word.text}</h1></a>
                             <hr/>
                             <i>{word.partOfSpeech}pos</i>
                             <br/>{word.definition}this is the definition of the word
