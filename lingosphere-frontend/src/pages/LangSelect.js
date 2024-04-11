@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button, Modal, Box, Typography } from '@mui/material';
+import { getAllLanguages } from '../api/languageApi';
 import { getUserLanguages, addUserLanguage, updateUserLanguage } from '../api/userLanguageApi';
 import './LangSelect.css';
-
-const languageOptions = [
-  // TODO: Fetch all language options from api
-  { id: 1, code: 'EN', name: 'English' },
-  { id: 2, code: 'ES', name: 'Spanish' },
-];
 
 const proficiencyDescriptions = {
   1: 'Beginner',
@@ -20,8 +15,17 @@ export default function LanguageSelection() {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [proficiencyLevel, setProficiencyLevel] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [languages, setLanguages] = useState([]);
+  const [languageOptions, getLanguages] = useState([]);
+  const [userLanguages, setLanguages] = useState([]);
 
+  // Get all language options
+  useEffect(() => {
+    getAllLanguages().then(languagesFetched => {
+        getLanguages(languagesFetched);
+    }).catch(error => console.error(error));
+  }, []);
+
+  // Get all of current user's chosen languages
   useEffect(() => {
     getUserLanguages({userId}).then(languagesFetched => {
         setLanguages(languagesFetched);
@@ -37,11 +41,11 @@ export default function LanguageSelection() {
     setProficiencyLevel(level);
     setModalOpen(false);
 
-    // If user has already added the language, (make a PUT request)
-    if (languages.some(language => language.userLanguageId === selectedLanguage.id)) {
+    // If user has already added the language,
+    if (userLanguages.some(language => language.userLanguageId === selectedLanguage.id)) {
       updateUserLanguage({userId, languageId: selectedLanguage.id, proficiencyLevel: level});
     }
-    // Else, add it (make a POST request)
+    // Else, add it
     else {
       addUserLanguage({userId, languageId: selectedLanguage.id, proficiencyLevel: level});
     }
