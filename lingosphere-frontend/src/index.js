@@ -5,7 +5,7 @@ import Layout from './pages/Layout';
 import {BrowserRouter as Router, Routes, Route, Navigate, Outlet} from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
-import LangSelect from "./pages/LangSelect";
+import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import WordInfo from "./pages/WordInfo";
@@ -26,7 +26,7 @@ root.render(
                     <Route element={<Layout />}>
                         <Route path="/word-history" element={<Profile />} />
                         <Route path="/" element={<Dashboard />} />
-                        <Route path="/settings" element={<LangSelect />} />
+                        <Route path="/settings" element={<Settings />} />
                         <Route path="/words/:wordId" element={<WordInfo />} />
                     </Route>
                 </Route>
