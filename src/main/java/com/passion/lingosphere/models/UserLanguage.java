@@ -1,6 +1,6 @@
 package com.passion.lingosphere.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,12 +11,11 @@ public class UserLanguage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userLanguageId;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "language_id", nullable = false)
     private Language language;
