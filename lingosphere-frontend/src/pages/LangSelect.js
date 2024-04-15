@@ -28,6 +28,7 @@ export default function LanguageSelection() {
   // Get all of current user's chosen languages
   useEffect(() => {
     getUserLanguages({userId}).then(languagesFetched => {
+        console.log("Fetched user languages:", languagesFetched);
         setLanguages(languagesFetched);
     }).catch(error => console.error(error));
 }, []);
@@ -41,21 +42,36 @@ export default function LanguageSelection() {
     setProficiencyLevel(level);
     setModalOpen(false);
 
-    // If user has already added the language,
-    if (userLanguages.some(language => language.userLanguageId === selectedLanguage.id)) {
-      updateUserLanguage({userId, languageId: selectedLanguage.id, proficiencyLevel: level});
-    }
-    // Else, add it
-    else {
-      addUserLanguage({userId, languageId: selectedLanguage.id, proficiencyLevel: level});
-    }
+    // Check if user has already added the language
+    const isNewLanguage = !userLanguages.some(lang => lang.language.languageId === selectedLanguage.languageId);
+
+    // Update local state of userLanguages
+    const updatedUserLanguages = isNewLanguage ? 
+        [...userLanguages, { language: selectedLanguage, proficiencyLevel: level }] :
+        userLanguages.map(lang => 
+            lang.language.languageId === selectedLanguage.languageId ? 
+            { ...lang, proficiencyLevel: level } : 
+            lang
+        );
+    setLanguages(updatedUserLanguages);
+
+    // Update userLanguage table in database
+    const updateData = { userId, languageId: selectedLanguage.languageId, proficiencyLevel: level };
+    isNewLanguage ? addUserLanguage(updateData) : updateUserLanguage(updateData);
   };
+
+  const getProficiencyLevel = (languageId) => {
+    const language = userLanguages.find(lang => lang.language.languageId === languageId);
+    return language ? proficiencyDescriptions[language.proficiencyLevel] : "Unselected";
+  };
+
   const renderLanguageButtons = () => {
     return languageOptions.map((language) => (
       <Grid item key={language.code}>
         <Button className="lang-button" onClick={() => handleLanguageSelect(language)}>
             <img className="flag-icon" src={require(`../images/flags/${language.name.toLowerCase()}.svg`)} alt={language.name} />
             <h3>{language.name}</h3>
+            <h6>({getProficiencyLevel(language.languageId)})</h6>
         </Button>
       </Grid>
     ));
