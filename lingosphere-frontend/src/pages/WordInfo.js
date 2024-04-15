@@ -27,9 +27,10 @@ export default function WordInfo() {
             <div className="word">
                 <h1>{wordDetails.text}</h1>
                 <hr/>
-                <i>{wordDetails.partOfSpeech}pos</i>
-                <br/>
-                {wordDetails.definition}this is the definition of the word
+                <i>{wordDetails.partOfSpeech}pos</i><br/>
+                {wordDetails.definition}this is the definition of the word<br/><br/>
+                this is an example sentence<br/><br/>
+                this is the etymology
             </div>
         </div>
     </div>
