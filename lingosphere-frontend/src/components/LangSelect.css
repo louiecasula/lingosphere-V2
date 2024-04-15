@@ -47,3 +47,11 @@ h1 {
     border-radius: 20px;
     box-shadow: black 0px 0px 5px 1px;
 }
+
+.flag-lang-name {
+    margin-bottom: 0;
+}
+
+.prof-level {
+    margin: 0;
+}

@@ -70,8 +70,8 @@ export default function LanguageSelection() {
       <Grid item key={language.code}>
         <Button className="lang-button" onClick={() => handleLanguageSelect(language)}>
             <img className="flag-icon" src={require(`../images/flags/${language.name.toLowerCase()}.svg`)} alt={language.name} />
-            <h3>{language.name}</h3>
-            <h6>({getProficiencyLevel(language.languageId)})</h6>
+            <h3 className='flag-lang-name'>{language.name}</h3>
+            <h6 className='prof-level'>({getProficiencyLevel(language.languageId)})</h6>
         </Button>
       </Grid>
     ));
@@ -79,7 +79,7 @@ export default function LanguageSelection() {
 
   return (
     <>
-      <h1>Language Settings</h1>
+      <h2 className='setting-header'>Language Preferences</h2>
       <Grid container className="lang-container" >
         {renderLanguageButtons()}
       </Grid>
