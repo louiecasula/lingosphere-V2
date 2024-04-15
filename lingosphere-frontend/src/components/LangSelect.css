@@ -1,0 +1,49 @@
+h1 {
+    text-align: center;
+}
+
+.lang-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lang-prof-box {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #FFFFFFF0;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.lang-container {
+    width: 70%;
+    flex: auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.lang-button {
+    width: 150px;
+    flex-direction: column;
+    font-size: 1.5em;
+    font-weight: 500;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+
+.lang-button:hover {
+    opacity: 1;
+}
+
+.flag-icon {
+    border: black solid 2px;
+    border-radius: 20px;
+    box-shadow: black 0px 0px 5px 1px;
+}
