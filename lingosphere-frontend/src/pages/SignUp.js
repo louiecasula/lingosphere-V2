@@ -15,6 +15,8 @@ export default function SignUp() {
   const [usernameError, setUsernameError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
   // Function to validate email
   const validateEmail = (email) => {
@@ -60,13 +62,13 @@ export default function SignUp() {
 
     // Password validation
     if (!validatePassword(password)) {
-      setPasswordError('Password must be 6 - 20 alphanumeric characters or special symbols');
+      setPasswordError('Password must be 6 - 20 characters including the following:\nUppercase letter, lowercase letter, number, special symbol');
       isValid = false;
     }
 
     // Matching confirmation password
     if (password !== confirmPassword) {
-      console.log("Passwords don't match");
+      setConfirmPasswordError("Passwords don't match");
       isValid = false;
     }
 
@@ -144,7 +146,7 @@ export default function SignUp() {
                   autoComplete="new-password"
                   onChange={e => setPassword(e.target.value)}
                   error={!!passwordError}
-                  helperText={passwordError}                  
+                  helperText={passwordError}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -156,6 +158,9 @@ export default function SignUp() {
                   type="password"
                   id="confirm-password"
                   autoComplete="new-password"
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  error={!!confirmPasswordError}
+                  helperText={confirmPasswordError}
                 />
               </Grid>
             </Grid>
