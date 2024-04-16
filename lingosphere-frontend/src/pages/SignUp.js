@@ -11,48 +11,66 @@ export default function SignUp() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [username, setUsername] = useState('');
+  const [usernameError, setUsernameError] = useState('');
 
   // Function to validate email
   const validateEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email);
   };
 
+  // Function to validate username
+  const validateUsername = (username) => {
+    return /^[a-zA-Z0-9]{6,20}$/.test(username);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const username = data.get('username');
     const email = data.get('email');
+    const username = data.get('username');
     const password = data.get('password');
     const confirmPassword = data.get('confirm-password');
 
     // Reset errors
     setEmailError('');
+    setUsernameError('');
+
+    let isValid = true;
 
     // Email validation
     if (!validateEmail(email)) {
       setEmailError('Invalid email format');
-      return;
+      isValid = false;
+    }
+
+    // Username validation
+    if (!validateUsername(username)) {
+      setUsernameError('Username must be 6 - 20 alphanumeric characters');
+      isValid = false;
     }
 
     // Password validation
     if (password !== confirmPassword) {
       console.log("Passwords don't match");
-      return;
+      isValid = false;
     }
 
     // API call to add user to database
-    registerUser({ username, email, password })
-            .then(data => {
-                console.log('Success:', data);
-                if (data.userId) {
-                    sessionStorage.setItem('userId', data.userId);
-                    sessionStorage.setItem('username', data.username);
-                    navigate('../settings');
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+    if (isValid) {
+      registerUser({ username, email, password })
+              .then(data => {
+                  console.log('Success:', data);
+                  if (data.userId) {
+                      sessionStorage.setItem('userId', data.userId);
+                      sessionStorage.setItem('username', data.username);
+                      navigate('../settings');
+                  }
+              })
+              .catch((error) => {
+                  console.error('Error:', error);
+              });
+    };
   };
 
   return (
@@ -96,6 +114,9 @@ export default function SignUp() {
                   label="Username"
                   name="username"
                   autoComplete="username"
+                  onChange={e => setUsername(e.target.value)}
+                  error={!!usernameError}
+                  helperText={usernameError}
                 />
               </Grid>
               <Grid item xs={12}>
