@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField, Button, Avatar, CssBaseline, Link, Grid, Box, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -9,6 +9,13 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  // Function to validate email
+  const validateEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -18,11 +25,22 @@ export default function SignUp() {
     const password = data.get('password');
     const confirmPassword = data.get('confirm-password');
 
+    // Reset errors
+    setEmailError('');
+
+    // Email validation
+    if (!validateEmail(email)) {
+      setEmailError('Invalid email format');
+      return;
+    }
+
+    // Password validation
     if (password !== confirmPassword) {
       console.log("Passwords don't match");
       return;
     }
 
+    // API call to add user to database
     registerUser({ username, email, password })
             .then(data => {
                 console.log('Success:', data);
@@ -65,6 +83,9 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={e => setEmail(e.target.value)}
+                  error={!!emailError}
+                  helperText={emailError}
                 />
               </Grid>
               <Grid item xs={12}>
