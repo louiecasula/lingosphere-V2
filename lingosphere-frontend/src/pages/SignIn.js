@@ -12,11 +12,8 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
-    console.log({
-      email: email,
-      password: password,
-    });
 
+    // Send user info to backend for authentication
     loginUser(email, password)
       .then(data => {
         console.log('Success:', data);
