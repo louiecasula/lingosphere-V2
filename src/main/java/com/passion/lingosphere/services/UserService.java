@@ -26,11 +26,11 @@ public class UserService {
     public User registerUser(UserDto userDto) throws UsernameAlreadyExistsException, EmailAlreadyExistsException {
         // Check if the user already exists
         if (userRepository.existsByUsername(userDto.getUsername())) {
-            throw new UsernameAlreadyExistsException("Username already exists");
+            throw new UsernameAlreadyExistsException("Username is taken");
         }
 
         if (userRepository.existsByEmail(userDto.getEmail())) {
-            throw new EmailAlreadyExistsException("Email already exists");
+            throw new EmailAlreadyExistsException("Email is already in use");
         }
 
         // Create a new User entity from the DTO
@@ -46,9 +46,9 @@ public class UserService {
     public User authenticateUser(String email, String password) throws AuthenticationException {
         // Check that the user's username and password exist
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new AuthenticationException("Email doesn't exist"));
+                .orElseThrow(() -> new AuthenticationException("Email not found"));
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new AuthenticationException("Password doesn't match");
+            throw new AuthenticationException("Invalid password");
         }
 
         // Return user
