@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Avatar, CssBaseline, Link, Grid, Box, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { registerUser } from '../api/userApi';
+import { checkEmailExists, checkUsernameExists, registerUser } from '../api/userApi';
 import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
@@ -33,7 +33,7 @@ export default function SignUp() {
     return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~`!@#$%^&*()+=\-_{}[\]\\|:;”’?/<>,.]).{6,20}$/.test(password);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
@@ -45,6 +45,7 @@ export default function SignUp() {
     setEmailError('');
     setUsernameError('');
     setPasswordError('');
+    setConfirmPasswordError('');
 
     let isValid = true;
 
@@ -53,10 +54,30 @@ export default function SignUp() {
       setEmailError('Invalid email format');
       isValid = false;
     }
+    try {
+      const emailExists = await checkEmailExists(email);
+      if (emailExists) {
+        setEmailError('Email is already in use');
+        isValid = false;
+      }
+    } catch(error) {
+      console.error('Error checking email:', error);
+      isValid = false;
+    }
 
     // Username validation
     if (!validateUsername(username)) {
       setUsernameError('Username must be 6 - 20 alphanumeric characters');
+      isValid = false;
+    }
+    try {
+      const usernameExists = await checkUsernameExists(username);
+      if (usernameExists) {
+        setUsernameError('Username is taken');
+        isValid = false;
+      }
+    } catch(error) {
+      console.error('Error checking username:', error);
       isValid = false;
     }
 
