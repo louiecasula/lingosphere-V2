@@ -52,4 +52,14 @@ public class UserService {
         // Return user
         return user;
     }
+
+    public boolean userExistsByEmail(String email) {
+        // Check if email is in database
+        return userRepository.existsByEmail(email);
+    }
+
+    public boolean userExistsByUsername(String username) {
+        // Check if username is in database
+        return userRepository.existsByUsername(username);
+    }
 }
